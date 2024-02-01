@@ -12,8 +12,9 @@ const Models = [
   // { title: 'CajaSeparador', url: './gltf/CajaSeparador.glb' },
   // { title: 'jamoneroMacondo2', url: './gltf/jamoneroMacondo2.glb' },
   // { title: 'jamoneroMacondo2', url: './gltf/jamoneroMacondo2.glb' },
-  { title: 'antorcha2', url: './antorcha2.glb' },
-  { title: 'antorcha1', url: './antorcha1.glb' },
+  // { title: 'antorcha2', url: './antorcha2.glb' },
+  // { title: 'antorcha1', url: './antorcha1.glb' },
+  { title: 'donaciones', url: './donaciones.glb' },
 ]
 
 function Model({ url, miEscala, miPosicion }) {
