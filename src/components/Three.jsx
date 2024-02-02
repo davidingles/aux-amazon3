@@ -12,9 +12,9 @@ const Models = [
   // { title: 'CajaSeparador', url: './gltf/CajaSeparador.glb' },
   // { title: 'jamoneroMacondo2', url: './gltf/jamoneroMacondo2.glb' },
   // { title: 'jamoneroMacondo2', url: './gltf/jamoneroMacondo2.glb' },
-  // { title: 'antorcha2', url: './antorcha2.glb' },
-  // { title: 'antorcha1', url: './antorcha1.glb' },
-  { title: 'donaciones', url: './donaciones.glb' },
+  { title: 'antorcha2', url: './antorcha2.glb', miEscala: 2, miPosicion: 0 },
+  { title: 'antorcha1', url: './antorcha1.glb', miEscala: .5, miPosicion: 0 },
+  { title: 'donaciones', url: './donaciones.glb', miEscala: .1, miPosicion: 0 },
 ]
 
 function Model({ url, miEscala, miPosicion }) {
@@ -45,22 +45,24 @@ function Fallback() {
   return <Html><div>Loading...</div></Html>
 }
 
-export default function EstucheConAsas({ david, escala, posicion }) {
-  const [title, setTitle] = useState(david)
+export default function EstucheConAsas({ title, escala, posicion }) {
+  const [currentTitle, setCurrentTitle] = useState(title)
 
   const { modelo } = useControls('Model', {
     modelo: {
-      value: david, // valor inicial
+      value: title, // valor inicial
       options: Models.map(({ title }) => title), // opciones para seleccionar
     },
   })
 
   useEffect(() => {
-    setTitle(modelo) // Usa el valor de modelo devuelto por useControls
+    setCurrentTitle(modelo) // Usa el valor de modelo devuelto por useControls
   }, [modelo])
 
-  const modelIndex = Models.findIndex((m) => m.title === title)
+  const modelIndex = Models.findIndex((m) => m.title === currentTitle)
   const modelUrl = modelIndex !== -1 ? Models[modelIndex].url : null
+  const modelEscala = modelIndex !== -1 ? Models[modelIndex].miEscala : escala
+  const modelPosicion = modelIndex !== -1 ? Models[modelIndex].miPosicion : posicion
 
   return (
     <>
@@ -72,7 +74,7 @@ export default function EstucheConAsas({ david, escala, posicion }) {
         <pointLight position={[100, -100, 100]} intensity={11111} decay={2} /> */}
         <ambientLight intensity={4} />
         <Suspense fallback={<Fallback />}>
-          {modelUrl && <Model url={modelUrl} miEscala={escala} miPosicion={posicion} />}
+          {modelUrl && <Model url={modelUrl} miEscala={modelEscala} miPosicion={modelPosicion} />}
         </Suspense>
         <OrbitControls autoRotate autoRotateSpeed={.6} />
         <ContactShadows resolution={512} scale={30} position={[0, -0.2, 0.0]} blur={.1} opacity={.5} far={10} color='#8a6246' />

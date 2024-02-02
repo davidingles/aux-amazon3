@@ -1,15 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import Three2 from '../components/Three.jsx'
+import Three from '../components/Three.jsx'
+// let title = 'donaciones'
 ---
 
 <Layout title='Welcome to Astro.'>
 	<main class='h-screen flex justify-center bg-slate-500'>
-		<Three2
-			client:load
-			david='donaciones'
-			escala={0.2}
-			posicion={-0.3}
-		/>
+		<Three client:load />
 	</main>
 </Layout>
+
+<!-- 
+title={title}
+escala={title === 'antorcha1' ? 0.1 : 0.1}
+posicion={title === 'antorcha1' ? 0.1 : -0.3} -->
